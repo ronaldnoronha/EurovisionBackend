@@ -1,12 +1,6 @@
 import Fluent
 import Vapor
 
-struct User: Content {
-    let name: String
-    let password: String
-}
-
-
 func routes(_ app: Application) throws {
     app.get { req async in
         "It works!"
