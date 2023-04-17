@@ -8,7 +8,7 @@
 import Fluent
 import Vapor
 
-final class Vote: Model, Content {
+final class Vote: Model, Content, Codable {
     static let schema = "votes"
     
     @ID(key: .id)
@@ -20,34 +20,34 @@ final class Vote: Model, Content {
     @Field(key: "country")
     var country: String
     
-    @Field(key: "point12")
+    @Field(key: "points12")
     var points12: String
     
-    @Field(key: "point10")
+    @Field(key: "points10")
     var points10: String
     
-    @Field(key: "point8")
+    @Field(key: "points8")
     var points8: String
     
-    @Field(key: "point7")
+    @Field(key: "points7")
     var points7: String
     
-    @Field(key: "point6")
+    @Field(key: "points6")
     var points6: String
     
-    @Field(key: "point5")
+    @Field(key: "points5")
     var points5: String
     
-    @Field(key: "point4")
+    @Field(key: "points4")
     var points4: String
     
-    @Field(key: "point3")
+    @Field(key: "points3")
     var points3: String
     
-    @Field(key: "point2")
+    @Field(key: "points2")
     var points2: String
     
-    @Field(key: "point1")
+    @Field(key: "points1")
     var points1: String
     
     init() {}

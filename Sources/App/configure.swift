@@ -12,6 +12,7 @@ public func configure(_ app: Application) throws {
     app.migrations.add(CreateTodo())
     app.migrations.add(CreateUsers())
     app.migrations.add(CreateRepresentations())
+    app.migrations.add(CreateVotes())
 
     try app.autoMigrate().wait()
     
