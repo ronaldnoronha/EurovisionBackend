@@ -5,6 +5,10 @@ struct Votes: Content {
     let votes: [Vote]
 }
 
+struct RepresentationResponse: Content {
+    let country: String
+}
+
 
 func routes(_ app: Application) throws {
     // /login?name=ron&password=hey
@@ -25,7 +29,7 @@ func routes(_ app: Application) throws {
             throw Abort(.badRequest, reason: "No country allocated, talk to admin")
         }
         
-        return representation.country
+        return RepresentationResponse(country: representation.country)
     }
         
     // /signup
