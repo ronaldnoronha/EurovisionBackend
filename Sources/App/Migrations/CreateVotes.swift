@@ -27,6 +27,6 @@ struct CreateVotes: AsyncMigration {
     }
     
     func revert(on database: Database) async throws {
-        try await database.schema("vores").delete()
+        try await database.schema("votes").delete()
     }
 }

@@ -9,6 +9,13 @@ struct RepresentationResponse: Content {
     let country: String
 }
 
+struct HasVotesRequest: Content {
+    let country: String
+}
+
+struct HasVotedResponse: Content {
+    let hasVoted: Bool
+}
 
 func routes(_ app: Application) throws {
     // /login?name=ron&password=hey
@@ -58,7 +65,7 @@ func routes(_ app: Application) throws {
         
         try await representation.save(on: req.db)
         
-        return representation
+        return RepresentationResponse(country: representation.country)
     }
     
     // /submit
@@ -85,4 +92,16 @@ func routes(_ app: Application) throws {
     }
 
     try app.register(collection: TodoController())
+    
+    app.get("hasVoted") { req async throws -> HasVotedResponse in
+        let request = try req.query.decode(HasVotesRequest.self)
+        
+        if try await Vote.query(on: req.db)
+            .filter(\.$country==request.country)
+            .count() > 0 {
+            return HasVotedResponse(hasVoted: true)
+        } else {
+            return HasVotedResponse(hasVoted: false)
+        }
+    }
 }
