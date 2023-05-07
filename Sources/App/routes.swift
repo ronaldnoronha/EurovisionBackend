@@ -7,9 +7,13 @@ struct Votes: Content {
 
 struct RepresentationResponse: Content {
     let country: String
+    let delegate: String
+    let hasVoted: Bool
+    let vote: Vote?
+    let songs: [Song]
 }
 
-struct HasVotesRequest: Content {
+struct HasVotedRequest: Content {
     let country: String
 }
 
@@ -35,8 +39,27 @@ func routes(_ app: Application) throws {
         else {
             throw Abort(.badRequest, reason: "No country allocated, talk to admin")
         }
+    
+        let hasVoted: Bool
+        if try await Vote.query(on: req.db)
+            .filter(\.$country==representation.country)
+            .count() > 0 {
+            hasVoted = true
+        } else {
+            hasVoted = false
+        }
         
-        return RepresentationResponse(country: representation.country)
+        var votes: Vote? = hasVoted ? try await Vote.query(on: req.db)
+            .filter(\.$country==representation.country)
+            .first() : nil
+        
+        return RepresentationResponse(
+            country: representation.country,
+            delegate: user.name,
+            hasVoted: hasVoted,
+            vote: votes,
+            songs: getSongEntries(country: representation.country)
+        )
     }
         
     // /signup
@@ -65,7 +88,13 @@ func routes(_ app: Application) throws {
         
         try await representation.save(on: req.db)
         
-        return RepresentationResponse(country: representation.country)
+        return RepresentationResponse(
+            country: representation.country,
+            delegate: user.name,
+            hasVoted: false,
+            vote: nil,
+            songs: getSongEntries(country: representation.country)
+        )
     }
     
     // /submit
@@ -93,8 +122,9 @@ func routes(_ app: Application) throws {
 
     try app.register(collection: TodoController())
     
+    // /hasVoted?country=australia
     app.get("hasVoted") { req async throws -> HasVotedResponse in
-        let request = try req.query.decode(HasVotesRequest.self)
+        let request = try req.query.decode(HasVotedRequest.self)
         
         if try await Vote.query(on: req.db)
             .filter(\.$country==request.country)
@@ -103,5 +133,19 @@ func routes(_ app: Application) throws {
         } else {
             return HasVotedResponse(hasVoted: false)
         }
+    }
+    
+    // /getVotes?country=australia
+    app.get("getVotes") { req async throws -> Vote in
+        let request = try req.query.decode(HasVotedRequest.self)
+        
+        guard let vote = try await Vote.query(on: req.db)
+            .filter(\.$country==request.country)
+            .first()
+        else {
+            throw Abort(.badRequest, reason: "No recorded votes for the delegate")
+        }
+        
+        return vote
     }
 }
