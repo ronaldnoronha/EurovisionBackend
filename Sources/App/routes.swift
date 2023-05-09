@@ -21,6 +21,10 @@ struct HasVotedResponse: Content {
     let hasVoted: Bool
 }
 
+struct DeleteRequest: Content {
+    let delegate: String
+}
+
 func routes(_ app: Application) throws {
     // /login?name=ron&password=hey
     app.get("login") { req async throws in
@@ -147,5 +151,22 @@ func routes(_ app: Application) throws {
         }
         
         return vote
+    }
+    
+    // /delete?delegate=ron
+    app.get("delete") { req async throws -> Votes in
+        let request = try req.query.decode(DeleteRequest.self)
+        
+        guard let vote = try await Vote.query(on: req.db)
+            .filter(\.$delegate==request.delegate)
+            .first()
+        else {
+            throw Abort(.badRequest, reason: "No recorded votes for the delegate")
+        }
+        
+        try await vote.delete(on: req.db)
+        
+        return Votes(votes: try await Vote.query(on: req.db)
+            .all())
     }
 }
