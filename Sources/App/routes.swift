@@ -53,7 +53,7 @@ func routes(_ app: Application) throws {
             hasVoted = false
         }
         
-        var votes: Vote? = hasVoted ? try await Vote.query(on: req.db)
+        let votes: Vote? = hasVoted ? try await Vote.query(on: req.db)
             .filter(\.$country==representation.country)
             .first() : nil
         
@@ -68,6 +68,10 @@ func routes(_ app: Application) throws {
         
     // /signup
     app.post("signup") { req async throws in
+        if stopVoting {
+            throw Abort(.badRequest, reason: "Voting has stopped")
+        }
+        
         let user = try req.content.decode(User.self)
         
         if try await User.query(on: req.db)
@@ -103,6 +107,10 @@ func routes(_ app: Application) throws {
     
     // /submit
     app.post("submit") { req async throws in
+        if stopVoting {
+            throw Abort(.badRequest, reason: "Voting has stopped")
+        }
+        
         let vote = try req.content.decode(Vote.self)
         
         if try await Vote.query(on: req.db)
@@ -155,6 +163,10 @@ func routes(_ app: Application) throws {
     
     // /delete?delegate=ron
     app.get("delete") { req async throws -> Votes in
+        if stopVoting {
+            throw Abort(.badRequest, reason: "Voting has stopped")
+        }
+        
         let request = try req.query.decode(DeleteRequest.self)
         
         guard let vote = try await Vote.query(on: req.db)
@@ -168,5 +180,17 @@ func routes(_ app: Application) throws {
         
         return Votes(votes: try await Vote.query(on: req.db)
             .all())
+    }
+    
+    // /stop
+    app.get("stop") { req async throws in
+        stopVoting = true
+        return HTTPStatus.ok
+    }
+    
+    // /reversestop
+    app.get("reversestop") { req async throws in
+        stopVoting = false
+        return HTTPStatus.ok
     }
 }
