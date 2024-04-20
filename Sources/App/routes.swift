@@ -26,6 +26,11 @@ struct DeleteRequest: Content {
 }
 
 func routes(_ app: Application) throws {
+    // /ping
+    app.get("ping") { _ in
+        return "Eurovision pong"
+    }
+    
     // /login?name=ron&password=hey
     app.get("login") { req async throws in
         let user = try req.query.decode(User.self)
@@ -51,7 +56,7 @@ func routes(_ app: Application) throws {
             hasVoted = true
         } else {
             hasVoted = false
-        }
+        } 
         
         let votes: Vote? = hasVoted ? try await Vote.query(on: req.db)
             .filter(\.$country==representation.country)
