@@ -25,10 +25,14 @@ struct DeleteRequest: Content {
     let delegate: String
 }
 
+struct PingResponse: Content {
+    let connection: Bool
+}
+
 func routes(_ app: Application) throws {
     // /ping
     app.get("ping") { _ in
-        return "Eurovision pong"
+        return PingResponse(connection: true)
     }
     
     // /login?name=ron&password=hey
