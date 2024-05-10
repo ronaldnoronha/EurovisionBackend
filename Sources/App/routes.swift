@@ -191,6 +191,14 @@ func routes(_ app: Application) throws {
             .all())
     }
     
+    // /delegates
+    app.get("delegates") { req async throws -> [Representation] in
+        let delegates = try await Representation.query(on: req.db)
+            .all()
+        
+        return delegates
+    }
+    
     // /stop
     app.get("stop") { req async throws in
         stopVoting = true

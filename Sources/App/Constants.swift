@@ -21,175 +21,182 @@ let participants: [String] = [
     "australia",
     "austria",
     "azerbaijan",
+    "belarus",
     "belgium",
+    "bosnia-and-herzegovina",
     "bulgaria",
     "croatia",
     "cyprus",
-    "czech-republic",
+    "czechia",
     "denmark",
     "estonia",
     "finland",
     "france",
-    "germany",
     "georgia",
+    "germany",
     "greece",
+    "hungary",
     "iceland",
     "ireland",
     "israel",
     "italy",
     "latvia",
     "lithuania",
+    "luxembourg",
     "malta",
     "moldova",
     "montenegro",
+    "morocco",
     "netherlands",
     "north-macedonia",
     "norway",
     "poland",
     "portugal",
     "romania",
+    "russia",
     "san-marino",
     "serbia",
+    "sloakia",
     "slovenia",
     "spain",
     "sweden",
     "switzerland",
+    "turkey",
     "ukraine",
     "united-kingdom"
 ]
 
-
 let songEntries = """
 [
     {
-    "country": "austria",
-    "songName": "Who The Hell Is Edgar?",
-    "link": "ZMmLeV47Au4"
+        "country": "sweden",
+        "songName": "Unforgettable",
+        "link": "K4hlFKVHsag"
     },
     {
-    "country": "portugal",
-    "songName": "Ai Coracao",
-    "link": "wa3suiOzAAk"
+        "country": "ukraine",
+        "songName": "Teresa & Maria",
+        "link": "-qjs54ZTRBQ"
     },
     {
-    "country": "switzerland",
-    "songName": "Watergun",
-    "link": "_8-Sbc_GZMc"
+        "country": "germany",
+        "songName": "Always on the Run",
+        "link": "_KXwJAu7aCU"
     },
     {
-    "country": "poland",
-    "songName": "Solo",
-    "link": "Jjsl-JCHDWE"
+        "country": "luxembourg",
+        "songName": "Fighter",
+        "link": "u6p4dujtvPI"
     },
     {
-    "country": "serbia",
-    "songName": "Samo mi se spava",
-    "link": "oeIVwYUge8o"
+        "country": "netherlands",
+        "songName": "Europapa",
+        "link": "IiHFnmI8pxg"
     },
     {
-    "country": "france",
-    "songName": "Evidemment",
-    "link": "GWfbEFH9NvQ"
+        "country": "israel",
+        "songName": "Hurricane",
+        "link": "xGvv0kIZgZI"
     },
     {
-    "country": "cyprus",
-    "songName": "Break a Broken Heart",
-    "link": "zrFUKqTy4zI"
+        "country": "lithuania",
+        "songName": "Luktelk",
+        "link": "HuLKyOQcRDw"
     },
     {
-    "country": "spain",
-    "songName": "Eaea",
-    "link": "NGnEoSypBhE"
+        "country": "spain",
+        "songName": "Zorra",
+        "link": "RUa9TMRzmlI"
     },
     {
-    "country": "sweden",
-    "songName": "Tattoo",
-    "link": "b3vJfR81xO0"
+        "country": "estonia",
+        "songName": "(nendest) narkootikumidest ei tea me (küll) midagi",
+        "link": "7uSGQ566fyY"
     },
     {
-    "country": "albania",
-    "songName": "Duje",
-    "link": "mp8OG4ApocI"
+        "country": "ireland",
+        "songName": "Doomsday Blue",
+        "link": "BNc5zTYkTaQ"
     },
     {
-    "country": "italy",
-    "songName": "Due vite",
-    "link": "N4HBDAbdXUg"
+        "country": "latvia",
+        "songName": "Hollow",
+        "link": "N1YvDgwszn8"
     },
     {
-    "country": "estonia",
-    "songName": "Bridges",
-    "link": "wO9g5t3VSuw"
+        "country": "greece",
+        "songName": "Zari",
+        "link": "VRBBQ-B4q4s"
     },
     {
-    "country": "finland",
-    "songName": "Cha Cha Cha",
-    "link": "znWi3zN8Ucg"
+        "country": "united-kingdom",
+        "songName": "Dizzy",
+        "link": "kiIhvA2Ozzk"
     },
     {
-    "country": "czechia",
-    "songName": "My Sister's Crown",
-    "link": "-y78qgDlzAM"
+        "country": "norway",
+        "songName": "Ulveham",
+        "link": "UycoKAz1Jm8"
     },
     {
-    "country": "australia",
-    "songName": "Promise",
-    "link": "aqtu2GspT80"
+        "country": "italy",
+        "songName": "La noia",
+        "link": "jwfjNjV5DIw"
     },
     {
-    "country": "belgium",
-    "songName": "Because of You",
-    "link": "ORhEoS6d8e4"
+        "country": "serbia",
+        "songName": "Ramonda",
+        "link": "IyO42taxFpM"
     },
     {
-    "country": "armenia",
-    "songName": "Future Lover",
-    "link": "Co8ZJIejXBA"
+        "country": "finland",
+        "songName": "No Rules!",
+        "link": "eXvdKgO2Acw"
     },
     {
-    "country": "moldova",
-    "songName": "Soarele si Luna",
-    "link": "se9LDgFW6ak"
+        "country": "portugal",
+        "songName": "Grito",
+        "link": "246RdLYgRZY"
     },
     {
-    "country": "ukraine",
-    "songName": "Heart of Steel",
-    "link": "neIscK1hNxs"
+        "country": "armenia",
+        "songName": "Jako",
+        "link": "t0sefiNLP_E"
     },
     {
-    "country": "norway",
-    "songName": "Queen of Kings",
-    "link": "CxNiUxdJnTQ"
+        "country": "cyprus",
+        "songName": "Liar",
+        "link": "_6ncN7WC_Og"
     },
     {
-    "country": "germany",
-    "songName": "Blood & Glitter",
-    "link": "Y12_YMs9kCQ"
+        "country": "switzerland",
+        "songName": "The Code",
+        "link": "coOJkjCMcow"
     },
     {
-    "country": "lithuania",
-    "songName": "Stay",
-    "link": "68lbEUDuWUQ"
+        "country": "slovenia",
+        "songName": "Veronika",
+        "link": "tSek8SqlDIA"
     },
     {
-    "country": "israel",
-    "songName": "Unicorn",
-    "link": "r4wbdKmM3bQ"
+        "country": "croatia",
+        "songName": "Rim Tim Tagi Dim",
+        "link": "6LyjyuaQggs"
     },
     {
-    "country": "slovenia",
-    "songName": "Carpe Diem",
-    "link": "vfTiuZaESKs"
+        "country": "georgia",
+        "songName": "Firefighter",
+        "link": "9zrWufVsIeM"
     },
     {
-    "country": "croatia",
-    "songName": "Mama SC",
-    "link": "AyKj8jA0Qoc"
+        "country": "france",
+        "songName": "Mon amour",
+        "link": "f-z9PFfpzeE"
     },
     {
-    "country": "united-kingdom",
-    "songName": "I Wrote A Song",
-    "link": "tJ21grjN6wU"
+        "country": "austria",
+        "songName": "We Will Rave",
+        "link": "KqSuRaN9zFk"
     }
 ]
 """
